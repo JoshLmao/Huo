@@ -5,11 +5,12 @@ using UnityEngine;
 public class PickupController : MonoBehaviour
 {
     private ChestController m_chest = null;
+    private TorchController m_torch = null;
     private bool m_canOpenChest = false;
 
     void Start()
     {
-        
+        m_torch = GetComponent<TorchController>();
     }
 
     void Update()
@@ -22,8 +23,15 @@ public class PickupController : MonoBehaviour
             {
                 if (m_chest != null)
                 {
-                    Debug.Log("Can open a chest");
-                    m_chest.OpenChest();
+                    if (m_chest.IsOpen())
+                    {
+                        Reward reward = m_chest.TakeReward();
+                        m_torch.AddToFlame(reward.Amount);
+                    }
+                    else
+                    {
+                        m_chest.OpenChest();
+                    }
                 }
                 else
                 {

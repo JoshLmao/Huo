@@ -47,12 +47,13 @@ public class TorchController : MonoBehaviour
             // Update flame alpha
             Color color = flameRenderer.material.GetColor("_TintColor");
             color.a = DurationRemaining / m_startDuration;
-            GetComponent<Renderer>().material.SetColor("_TintColor", color);
+            if (flameRenderer)
+                flameRenderer.material.SetColor("_TintColor", color);
 
             // Update smoke alpha
             var smokeColor = smokeRenderer.material.GetColor("_TintColor");
             smokeColor.a = DurationRemaining / m_startDuration;
-            GetComponent<Renderer>().material.SetColor("TintColor", smokeColor);
+            smokeRenderer.material.SetColor("TintColor", smokeColor);
 
             if (DurationRemaining <= 0f)
             {
@@ -71,5 +72,7 @@ public class TorchController : MonoBehaviour
     public void AddToFlame(float amount)
     {
         DurationRemaining += amount;
+        Debug.Log("New DurationAmount: " + DurationRemaining);
     }
+
 }
