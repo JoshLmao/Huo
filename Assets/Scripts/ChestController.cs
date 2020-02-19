@@ -1,10 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ChestController : MonoBehaviour
 {
     public float RewardAmount = 50f;
+
+    public event Action OnRewardTaken;
 
     private Animator m_animController = null;
 
@@ -55,6 +58,8 @@ public class ChestController : MonoBehaviour
 
             Destroy(m_boxAnimator);
         }
+
+        OnRewardTaken?.Invoke();
 
         return new Reward()
         {

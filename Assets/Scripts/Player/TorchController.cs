@@ -6,6 +6,7 @@ public class TorchController : MonoBehaviour
 {
     public ParticleSystem FlamePS;
     public ParticleSystem SmokePS;
+    public Light m_fireLight;
 
     /// <summary>
     /// Duration the flame will last
@@ -55,9 +56,13 @@ public class TorchController : MonoBehaviour
             smokeColor.a = DurationRemaining / m_startDuration;
             smokeRenderer.material.SetColor("TintColor", smokeColor);
 
+            // Update light for fire
+            m_fireLight.intensity = (DurationRemaining / m_startDuration) * 2f;
+            //Debug.Log("Light: " + m_fireLight.intensity);
+
             if (DurationRemaining <= 0f)
             {
-                Debug.Log("Game Over - No Flame");
+                Debug.LogError("Game Over - No Flame left");
                 break;
             }
 

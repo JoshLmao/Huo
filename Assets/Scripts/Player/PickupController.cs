@@ -17,8 +17,6 @@ public class PickupController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("E pressed!");
-
             if (m_canOpenChest)
             {
                 if (m_chest != null)
