@@ -6,7 +6,7 @@ public class PickupController : MonoBehaviour
 {
     private ChestController m_chest = null;
     private TorchController m_torch = null;
-    private bool m_canOpenChest = false;
+    private bool m_canInteractChest = false;
 
     void Start()
     {
@@ -17,7 +17,7 @@ public class PickupController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (m_canOpenChest)
+            if (m_canInteractChest)
             {
                 if (m_chest != null)
                 {
@@ -43,7 +43,7 @@ public class PickupController : MonoBehaviour
     {
         if (IsChestTrigger(other.tag))
         {
-            m_canOpenChest = true;
+            m_canInteractChest = true;
             m_chest = other.gameObject.transform.parent.gameObject.GetComponent<ChestController>();
         }
     }
@@ -52,7 +52,7 @@ public class PickupController : MonoBehaviour
     {
         if (IsChestTrigger(other.tag))
         {
-            m_canOpenChest = false;
+            m_canInteractChest = false;
             m_chest = null;
         }
     }

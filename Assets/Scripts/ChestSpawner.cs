@@ -17,17 +17,9 @@ public class ChestSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        foreach (Transform t in MasterObject.transform)
-        {
-            //GameObject inst = Instantiate(m_chestPrefab, t.position, t.rotation, MasterObject.transform);
-            //m_chests.Add(inst);
-
-            
-        }
-
         foreach (Transform child in MasterObject.transform)
         {
-            Debug.Log(child.gameObject);
+            Debug.Log("Spawning at: " + child.gameObject);
             var inst= Instantiate(m_chestPrefab, child.gameObject.transform);
             m_chests.Add(inst);
 
@@ -41,8 +33,8 @@ public class ChestSpawner : MonoBehaviour
     private void OnRewardTaken()
     {
         m_takenRewards++;
-
-        if (m_takenRewards == m_chests.Count)
+        Debug.Log("Have: " + m_takenRewards + " Need: " + m_chests.Count);
+        if (m_takenRewards >= m_chests.Count)
         {
             Debug.Log("You WIN!");
         }
